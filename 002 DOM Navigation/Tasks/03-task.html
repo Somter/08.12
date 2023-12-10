@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="statsTable">
+        <tr>
+            <th>Месяц</th>
+            <th>Отдел 1</th>
+            <th>Отдел 2</th>
+        </tr>
+        <tr>
+            <td>Январь</td>
+            <td>50</td>
+            <td>120</td>
+        </tr>
+        <tr>
+            <td>Февраль</td>
+            <td>60</td>
+            <td>140</td>
+        </tr>
+        <tr>
+            <td>Март</td>
+            <td>125</td>
+            <td>115</td>
+        </tr>
+        <tr>
+            <td>Апрель</td>
+            <td>87</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Март</td>
+            <td>95</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>Июнь</td>
+            <td>115</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>Июль</td>
+            <td>125</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Итого:</td>
+            <td id="output1"></td>
+            <td id="output2"></td>
+        </tr>
+    </table>
+
+    <div id="result"></div>
+
+    <script>
+        /*
+        Задание:
+        Добавьте строку "Итого" для таблицы statsTable. Напишите сценарий, которым выведите во вторую ячейку этой строки сумму всех числовых значений второй колонки.
+        Выведите в третью ячейку этой строки сумму всех числовых значений из третьей колонки таблицы.
+        В div с id result выведите сообщение "Отдел 1 сделал больше продаж" или "Отдел 2 сделал больше продаж" на основе раннее вычисленных значений в строке "Итого".
+        Используйте любые методы, которые были рассмотрены на в прошлых уроках.
+        */
+        let table = document.querySelector("#statsTable");
+        let output1 = document.getElementById('output1');
+        let output2 = document.getElementById('output2');
+
+        let sumSales1 = 0;
+        let sumSales2 = 0;
+
+        for (const row of table.rows) {
+            let sales1Cell = row.cells[1];
+            let sales2Cell = row.cells[2];
+
+            if (sales1Cell && sales2Cell) {
+                if (!isNaN(Number(sales1Cell.textContent))) {
+                    sumSales1 += Number(sales1Cell.textContent);
+                }
+
+                if (!isNaN(Number(sales2Cell.textContent))) {
+                    sumSales2 += Number(sales2Cell.textContent);
+                }
+            }
+        }
+
+        output1.textContent = sumSales1;
+        output2.textContent = sumSales2;
+
+        let resultDiv = document.getElementById('result');
+        if (sumSales1 > sumSales2) {
+            resultDiv.textContent = "Отдел 1 сделал больше продаж";
+        } else if (sumSales1 < sumSales2) {
+            resultDiv.textContent = "Отдел 2 сделал больше продаж";
+        } else {
+            resultDiv.textContent = "Продажи отделов равны";
+        }
+    </script>
+</body>
+
+</html>
